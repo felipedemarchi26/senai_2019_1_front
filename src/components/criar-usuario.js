@@ -26,6 +26,15 @@ class CriarUsuario extends Component {
       });
   }
 
+  componentWillMount() {
+      const id = this.props.match.params.id;
+      if (id) {
+          console.log("ID recebido!");
+      } else {
+          console.log("ID não recebido!");
+      }
+  }
+
   salvar(e) {
       e.preventDefault();
 
