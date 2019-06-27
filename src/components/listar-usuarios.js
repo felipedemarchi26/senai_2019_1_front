@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios';
+import {Link} from 'react-router-dom';
 
 class ListarUsuarios extends Component {
     constructor(props) {
@@ -37,6 +38,7 @@ class ListarUsuarios extends Component {
                             <td>{usuario.cpf}</td>
                             <td>{usuario.dataNascimento}</td>
                             <td>{usuario.descricao}</td>
+                            <td><Link to={`/usuario/cadastrar/${usuario.idUsuario}`}>Editar</Link></td>
                         </tr>
                     )}   
                 </tbody>                

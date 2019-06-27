@@ -7,6 +7,7 @@ class CriarUsuario extends Component {
       super(props);
 
       this.state = {
+            id: null,
             nome: "",
             email: "",
             cpf: "",
@@ -29,9 +30,20 @@ class CriarUsuario extends Component {
   componentWillMount() {
       const id = this.props.match.params.id;
       if (id) {
-          console.log("ID recebido!");
-      } else {
-          console.log("ID não recebido!");
+          axios.get(`http://localhost:8080/exemplo/usuario/buscar-por-id/${id}`)
+          .then(res => {
+              const usuario = res.data;
+              this.setState({
+                id: usuario.idUsuario,
+                nome: usuario.nome,
+                email: usuario.email,
+                cpf: usuario.cpf,
+                dataNascimento: usuario.dataNascimento,
+                descricao: usuario.descricao == null ? "" : usuario.descricao
+              })
+          }).catch(res => {
+              console.log(res);
+          })
       }
   }
 
@@ -39,6 +51,7 @@ class CriarUsuario extends Component {
       e.preventDefault();
 
       const usuario = {
+          idUsuario: this.state.id,
           nome: this.state.nome,
           email: this.state.email,
           cpf: this.state.cpf,
